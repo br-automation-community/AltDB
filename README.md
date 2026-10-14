@@ -36,6 +36,8 @@ It provides identical function block signatures, constants, error codes, and asy
 
 ```text
 ├── AS_Project/                     # Full Automation Studio sample project
+├── docker-compose.yml              # Local testing MSSQL instance
+├── init.sql                        # Automatic creation of TestDb (level 120)
 │   ├── Logical/
 │   │   ├── Libraries/
 │   │   │   └── AltDB/              # The AltDB drop-in library package
