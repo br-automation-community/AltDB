@@ -1,0 +1,46 @@
+(********************************************************************
+ * COPYRIGHT --  
+ ********************************************************************
+ * Program: SQLRecipe
+ * File: SQLRecipe.var
+ * Author: B&R
+ * Created: December 27, 2010
+ ********************************************************************
+ * Local variables of program SQLRecipe
+ ********************************************************************)
+(*Constants*)
+VAR CONSTANT
+	LENGTH_NAME : USINT := 30; (*Length of an receipe name*)
+END_VAR
+(*Configuration Variables*)
+VAR
+	DBConnectState : dbGetConnState;
+	HOST : STRING[40] := '127.0.0.1'; (*Hostname/IP:Port of SQL Server*)
+	DATABASE : STRING[40] := 'TestDb'; (*name of database*)
+	TABLE : STRING[40] := 'Recipes'; (*name of table*)
+	USERNAME : STRING[40] := 'sa'; (*username*)
+	PASSWORD : STRING[40] := 'YourStrong@Passw0rd'; (*password*)
+END_VAR
+(*Variables*)
+VAR
+	eStep : Steps_enum := (0);
+	Command : CommandInterface_typ;
+	ConnectionIdent : UDINT := 0;
+	sSQLstring : STRING[300] := '';
+	ReceipeNameCounter : UDINT := 0;
+END_VAR
+(*Functionblocks*)
+VAR
+	ReceipeDBConnect : dbConnect := (0);
+	ReceipeDBExecute : dbExecuteSql := (0);
+	ReceipeDBErrMsg : dbGetErrorMessage := (0);
+	ReceipeDBDisconnect : dbDisconnect := (0);
+	ReceipeDBGetData : dbGetData := (0);
+	ReceipeDBGetAffectedRows : dbGetAffectedRows := (0);
+	ReceipeDBFetchNextRow : dbFetchNextRow := (0);
+END_VAR
+(*Variables for databaseinterface*)
+VAR
+	sData : STRING[200] := '';
+	usCol : USINT := 0;
+END_VAR

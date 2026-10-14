@@ -1,0 +1,30 @@
+
+#Build Info
+*BuildInfo.var
+
+# Automation Studio temporary and build artifacts
+**/Temp/
+**/Binaries/
+**/Diagnosis/
+**/Listing/
+**/as/
+!**/Physical/**/*.set 
+
+# Automation Studio user-specific and editor state files
+**/*.user
+**/*.bak
+**/*.crossref
+**/*.brsp
+**/*.isopen
+**/*.set
+**/build.log
+
+# Operating system and editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Docker / local test environment
+*.env
+*.log

@@ -1,0 +1,61 @@
+(********************************************************************
+ * Library: AltDB
+ * File: Priv.var
+ ********************************************************************
+ * Private (implementation-only) constants.
+ * Not part of the AsDb-compatible public interface (see Types.typ,
+ * Constants.var and AltDB.fun, which must stay unchanged).
+ *
+ * Note: a static library in Automation Studio cannot declare its own
+ * (non-constant) global VAR - persistent state belongs to the FB
+ * instance of the *caller*. The connection pool shared by all FBs of
+ * this library (and the AsTCP FB instances it drives) is therefore
+ * kept as ordinary C file-scope variables, declared in State.h and
+ * defined once in State.c, not as IEC variables. Because this is a
+ * Library, _REPLACE_CONST is always active for its own translation
+ * units (confirmed by B&R's "Using PLC constants in ANSI C/C++
+ * programs" documentation), so the constants below are compiled as
+ * real #define's here and may be used in array bounds / switch-case
+ * within this library's own *.c files.
+ ********************************************************************)
+
+VAR CONSTANT
+	MAX_CONN				: UDINT := 8;		(*size of the connection pool, FR-07. Keep in sync with State.h*)
+	MAX_COLUMNS				: UDINT := 32;		(*max columns decoded per result set. Keep in sync with State.h*)
+	MAX_COL_VALUE_LEN		: UDINT := 512;		(*max raw bytes stored per column value. Keep in sync with State.h*)
+	MAX_DIAG				: UDINT := 8;		(*diagnostics ring size per connection. Keep in sync with State.h*)
+	TDS_DEFAULT_PACKET_SIZE	: UINT := 4096;
+	JOB_ABANDON_TICKS		: UDINT := 150000;	(*watchdog: ~ cycles before an abandoned job is cancelled*)
+	SQL_MAX_LEN				: UDINT := 4096;	(*max encoded SQL statement length; a documented reduction from the
+												  AsDb default of 65535 because this library sends every request as
+												  a single TDS packet (see Net.c / Common.h)*)
+
+	(* connection slot states, Section 9.2 (TLS states omitted, not implemented) *)
+	CONNSTATE_FREE			: UINT := 0;
+	CONNSTATE_OPENING		: UINT := 1;		(*TcpOpen in progress*)
+	CONNSTATE_CONNECTING	: UINT := 2;		(*TcpClient in progress*)
+	CONNSTATE_PRELOGIN		: UINT := 3;		(*PRELOGIN sent, awaiting response*)
+	CONNSTATE_LOGIN			: UINT := 4;		(*LOGIN7 sent, awaiting LOGINACK/DONE*)
+	CONNSTATE_IDLE			: UINT := 5;		(*ready for a batch*)
+	CONNSTATE_EXECUTING		: UINT := 6;		(*batch sent, awaiting first result*)
+	CONNSTATE_IN_RESULT		: UINT := 7;		(*result set open, rows pending*)
+	CONNSTATE_CLOSING		: UINT := 8;		(*TcpClose in progress*)
+	CONNSTATE_BROKEN		: UINT := 9;		(*socket/protocol error, only dbDisconnect/dbGetErrorMessage usable*)
+	CONNSTATE_FAILED		: UINT := 10;		(*login failed, only dbDisconnect/dbGetErrorMessage usable*)
+
+	(* job kinds - identifies which FB currently owns the connection's async job *)
+	JOB_NONE				: UINT := 0;
+	JOB_CONNECT				: UINT := 1;
+	JOB_EXECUTE				: UINT := 2;
+	JOB_FETCH				: UINT := 3;
+	JOB_DISCONNECT			: UINT := 4;
+
+	(* connection character encodings *)
+	DBENC_ISO_8859_1		: UINT := 0;
+	DBENC_UTF_8				: UINT := 1;
+
+	(* connection handle layout, Section 9.1 *)
+	HANDLE_TAG				: UDINT := 16#DB000000;
+	HANDLE_SLOT_MASK		: UDINT := 16#00000FFF;
+	HANDLE_GEN_SHIFT		: UDINT := 12;
+END_VAR
