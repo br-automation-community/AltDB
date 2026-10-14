@@ -44,7 +44,7 @@ It provides identical function block signatures, constants, error codes, and asy
 │   │   └── AltDBExample/           # Working reference recipe task
 │   └── Physical/                   # Hardware configuration
 └── README.md
-
+```
 
 ## Using AltDB in an Existing Machine Project
 
