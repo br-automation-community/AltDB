@@ -1,0 +1,30 @@
+name: Package and Release AltDB
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Package AltDB Library
+        run: |
+          # Zip only the library folder from Logical View
+          # Adjust path if your AS project folder is named differently
+          cd AS_Project/Logical/Libraries
+          zip -r ../../../AltDB.zip AltDB/
+          cd ../../../
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: AltDB.zip
+          generate_release_notes: true

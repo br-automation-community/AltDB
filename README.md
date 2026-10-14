@@ -41,5 +41,4 @@ It provides identical function block signatures, constants, error codes, and asy
 │   │   │   └── AltDB/              # The AltDB drop-in library package
 │   │   └── AltDBExample/           # Working reference recipe task
 │   └── Physical/                   # Hardware configuration
-├── AltDB.zip                       # Zipped AltDB drop-in library
 └── README.md
