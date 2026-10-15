@@ -9,8 +9,8 @@ It provides identical function block signatures, constants, error codes, and asy
 ## Current Testing & Status Disclaimer
 
 > **Important:**  
-> AltDB has currently been developed and tested **exclusively in B&R ARsim against Microsoft SQL Server 2022** running in a Linux container with database compatibility level 120 (SQL Server 2014 emulation).  
-> It has **not yet been validated on physical SG4/SG4-ARM PLC hardware**, nor on physical SQL Server 2005–2014 installations. Community testing and feedback are welcome.
+> AltDB has currently been developed and tested **exclusively in B&R AS4/AS6 ARsim and an AS4 APC 3100 against Microsoft SQL Server 2022** running in a Linux container with database compatibility level 120 (SQL Server 2014 emulation).  
+> It has **not yet been validated on physical SQL Server 2005–2014 installations.** Community testing and feedback are welcome.
 
 ---
 
