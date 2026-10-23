@@ -144,7 +144,7 @@ static void ConnectCommon(UDINT instAddr, BOOL enable, UDINT pServerName, UDINT 
 	AltDB_Unlock(slot);
 	if (r == NET_DONE) {
 		*status = ERR_OK;
-		*dbError = (gConn[slot].DiagCount > 0) ? 1 : 0; /* INFO received during login, e.g. "changed database context" [V-02] */
+		*dbError = 0;
 	} else {
 		*status = dbERR_DATABASE;
 		*dbError = DB_SQL_ERROR;

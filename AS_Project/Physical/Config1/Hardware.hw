@@ -23,7 +23,6 @@
       <Parameter ID="AssignedOperatingSystem" Value="ARemb" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="AltDB_Config1" />
-    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="ActivateEncryption" Value="0" />
     <Group ID="FileDevice1" />
     <Parameter ID="FileDeviceName1" Value="USER" />
