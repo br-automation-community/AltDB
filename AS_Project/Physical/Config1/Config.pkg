@@ -5,6 +5,7 @@
     <Object Type="File" Description="Hardware configuration">Hardware.hw</Object>
     <Object Type="File" Description="Hardware topology">Hardware.hwl</Object>
     <Object Type="Cpu">5APC3100_KBU2_000</Object>
+    <Object Type="File">Hardware.jpg</Object>
   </Objects>
   <Sources Download="false" IncludeUpgrades="true" Mode="ProjectTransfer" Option="Complete" />
 </Configuration>

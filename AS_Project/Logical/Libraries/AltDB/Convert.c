@@ -369,6 +369,18 @@ void AltDB_GetData(UDINT slot, UDINT columnIdx, INT dataType, UDINT pData, UDINT
 			AltDB_DiagPushClient(slot, "07006", "source column type is not convertible to an integer type");
 			*status = dbERR_DATABASE; *dbError = DB_SQL_ERROR; return;
 		}
+				/* AsDB compatibility: allow BIGINT -> UDINT */
+
+		if (dataType == -25 && dataSize == 4)
+		{
+			UDINT tmp = (UDINT)v;
+			memcpy((void *)pData, &tmp, 4);
+			*status = ERR_OK;
+			*dbError = 0;
+			*actDataSize = 4;
+			c->ColAlreadyRead[idx] = TRUE;
+			return;
+		}		
 		if (dataSize < needed) { *status = dbERR_BUFFER_SIZE; *dbError = DB_SQL_ERROR; *actDataSize = needed; return; }
 		{
 			unsigned char tmp[8];

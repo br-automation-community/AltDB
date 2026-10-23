@@ -164,7 +164,7 @@ void dbGetAffectedRows(struct dbGetAffectedRows *inst)
 		inst->status = dbERR_SQL_EXECUTE_REQUIRED; inst->dbError = DB_SQL_ERROR; return;
 	}
 	if (gConn[slot].HasResultSet) {
-		inst->status = dbERR_NOT_AVAILABLE; inst->dbError = DB_SQL_ERROR; return;
+		 inst->status = ERR_OK; inst->dbError = 0; inst->affectedRows = 0xFFFFFFFF; return;
 	}
 	inst->status = ERR_OK; inst->dbError = 0;
 	inst->affectedRows = gConn[slot].AffectedRowsKnown ? gConn[slot].AffectedRows : 0;

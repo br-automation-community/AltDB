@@ -58,6 +58,13 @@ typedef struct ConnSlot
 	UINT   JobKind;			/* JOB_*, which operation currently owns the job */
 	UDINT  JobOwner;		/* identity of the owning FB instance (its ADR), 0 = none */
 	UDINT  JobTicks;		/* watchdog: cycles since job last served */
+	BOOL   Abandoned;		/* TRUE if a dbConnect/dbConnectEnc job on this handle was
+							   cancelled mid-flight (enable := FALSE while BUSY, Section
+							   9.3). The next dbConnect/dbConnectEnc call on this handle
+							   re-captures the (possibly corrected) inputs and restarts
+							   the handshake from CONNSTATE_OPENING instead of blindly
+							   resuming stale state
+
 
 	/* --- TCP / TDS framing --- */
 	UDINT  TcpIdent;		/* 0 = socket not opened */
